@@ -7,18 +7,12 @@ jobs:
   test:
     runs-on: ${{ matrix.os }}
 
-    timeout-minutes: 2
+    timeout-minutes: 10
 
     strategy:
       matrix:
         os: [ubuntu-latest]
         node_version: [14, 16]
-        include:
-          - os: macos-latest
-            node_version: 16
-          - os: windows-latest
-            node_version: 16
-      fail-fast: false
 
     steps:
       - uses: actions/checkout@v3
