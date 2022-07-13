@@ -1,9 +1,11 @@
+name: release-please
+
 on:
   push:
     branches: [master]
   pull_request:
     branches: [master]
-name: release-please
+
 jobs:
   tests:
     uses: ./.github/workflows/run-unit-test.yml
