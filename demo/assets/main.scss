@@ -1,0 +1,87 @@
+:root {
+  font-size: 16px;
+}
+
+* {
+  line-height: 1.5;
+}
+
+body {
+  color: #333;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-size: 14px;
+  margin: 0;
+  padding: 0 0.5rem;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  font-size: 1em;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+h1 {
+  color: #1f1f1f;
+  margin: 0.75rem 0 1.5rem 0;
+}
+
+h2 {
+  margin: 1.5rem 0;
+}
+
+h3 {
+  font-size: 1rem;
+  margin: 1rem 0;
+}
+
+p {
+  margin: 0 0 1.25em 0;
+}
+
+p:last-child {
+  margin: 0;
+}
+
+hr {
+  margin: 1.5rem 0;
+}
+
+ul {
+  margin: 0;
+  padding-left: 1em;
+}
+
+li {
+  padding: 0.0625em 0;
+}
+
+.layout {
+  max-width: 600px;
+  margin: auto;
+  padding-bottom: 1.5rem;
+}
+
+.box {
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  padding: 1.5rem;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  background: white;
+}
+
+.push-down {
+  margin-top: 1500px;
+}
