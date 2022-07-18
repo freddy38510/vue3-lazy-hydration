@@ -228,19 +228,19 @@ props: {
 </script>
 ```
 
-#### `useHydrateWhenIdle({ hydrate, onCleanup }, timeout = 2000)`
+#### `useHydrateWhenIdle({ willPerformHydration, hydrate, onCleanup }, timeout = 2000)`
 
 ```html
 <script setup>
   import { useLazyHydration, useHydrateWhenIdle } from 'vue3-lazy-hydration';
 
   // delays hydration
-  const { hydrate, onCleanup } = useLazyHydration();
+  const { willPerformHydration, hydrate, onCleanup } = useLazyHydration();
 
   // hydrate when browser is idle
   // or when the timeout of 4000ms has elapsed
   // and the component has not already been hydrated
-  useHydrateWhenIdle({ hydrate, onCleanup }, 4000);
+  useHydrateWhenIdle({ willPerformHydration, hydrate, onCleanup }, 4000);
 </script>
 ```
 
@@ -251,7 +251,7 @@ props: {
   import { useLazyHydration, useHydrateWhenVisible } from 'vue3-lazy-hydration';
 
   // delays hydration
-  const { hydrate, onCleanup } = useLazyHydration();
+  const { willPerformHydration, hydrate, onCleanup } = useLazyHydration();
 
   // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
   const observerOptions = {
@@ -260,7 +260,10 @@ props: {
   };
 
   // hydrate when one of the root elements is visible
-  useHydrateWhenVisible({ hydrate, onCleanup }, observerOptions);
+  useHydrateWhenVisible(
+    { willPerformHydration, hydrate, onCleanup },
+    observerOptions
+  );
 </script>
 ```
 
@@ -271,14 +274,14 @@ props: {
   import { useLazyHydration, useHydrateOnInteraction } from 'vue3-lazy-hydration';
 
   // delays hydration
-  const { hydrate, onCleanup } = useLazyHydration();
+  const { willPerformHydration, hydrate, onCleanup } = useLazyHydration();
 
   // hydrate when one of the elements triggers a focus or click event
-  useHydrateOnInteraction({ hydrate, onCleanup }, ['focus' 'click']);
+  useHydrateOnInteraction({ willPerformHydration, hydrate, onCleanup }, ['focus' 'click']);
 </script>
 ```
 
-#### `useHydrateWhenTriggered({ hydrate, onCleanup }, trigger)`
+#### `useHydrateWhenTriggered({ willPerformHydration, hydrate, onCleanup }, trigger)`
 
 ```html
 <script setup>
@@ -296,7 +299,7 @@ props: {
   });
 
   // delays hydration
-  const { hydrate, onCleanup } = useLazyHydration();
+  const result = useLazyHydration();
 
   // trigger hydration when the triggerHydration property changes to true
   useHydrateWhenTriggered(result, toRef(props, 'triggerHydration'));
