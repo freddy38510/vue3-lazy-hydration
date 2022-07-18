@@ -1,28 +1,22 @@
+import { h, onMounted, ref } from 'vue';
 import { flushPromises } from '@vue/test-utils';
-import { expect, vi } from 'vitest';
-import { h, ref } from 'vue';
 
 import { ensureMocksReset, intersectionObserver } from '../../test/dom-mocks';
-import { withSSRSetup, triggerEvent } from '../../test/utils';
+import { withSSRSetup, triggerEvent, createApp } from '../../test/utils';
 
 import { createHydrationObserver } from '../utils';
-
-import useLazyHydration from './useLazyHydration';
-import useHydrateWhenVisible from './useHydrateWhenVisible';
+import { useLazyHydration, useHydrateWhenVisible } from '.';
 
 beforeEach(() => {
   document.body.innerHTML = '';
-
-  intersectionObserver.mock();
 });
 
 afterEach(() => {
-  intersectionObserver.restore();
-
   ensureMocksReset();
 });
 
 it('should hydrate when single root element is visible', async () => {
+  intersectionObserver.mock();
   const spyClick = vi.fn();
 
   const { container } = await withSSRSetup(() => {
@@ -32,6 +26,18 @@ it('should hydrate when single root element is visible', async () => {
 
     return () => h('button', { onClick: spyClick }, 'foo');
   });
+
+  // hydration not complete yet
+  triggerEvent('click', container.querySelector('button'));
+  expect(spyClick).not.toHaveBeenCalled();
+  expect(container.querySelector('button').hydrate).toBeDefined();
+
+  // make an element outside lazily hydrated component visible
+  intersectionObserver.simulate({
+    target: container.querySelector('div'),
+    isIntersecting: false,
+  });
+  await flushPromises();
 
   // hydration not complete yet
   triggerEvent('click', container.querySelector('button'));
@@ -49,9 +55,12 @@ it('should hydrate when single root element is visible', async () => {
   triggerEvent('click', container.querySelector('button'));
   expect(spyClick).toHaveBeenCalledOnce();
   expect(container.querySelector('button').hydrate).toBeUndefined();
+
+  intersectionObserver.restore();
 });
 
 it('should hydrate when one of multiple root elements is visible', async () => {
+  intersectionObserver.mock();
   const spyClick = vi.fn();
 
   const { container } = await withSSRSetup(() => {
@@ -80,10 +89,11 @@ it('should hydrate when one of multiple root elements is visible', async () => {
   // should be hydrated now
   triggerEvent('click', container.querySelector('button'));
   expect(spyClick).toHaveBeenCalledOnce();
+
+  intersectionObserver.restore();
 });
 
 it('should hydrate when IntersectionObserver API is unsupported', async () => {
-  intersectionObserver.restore();
   intersectionObserver.mockAsUnsupported();
 
   const spyClick = vi.fn();
@@ -101,9 +111,12 @@ it('should hydrate when IntersectionObserver API is unsupported', async () => {
   // should be hydrated now
   triggerEvent('click', container.querySelector('button'));
   expect(spyClick).toHaveBeenCalled();
+
+  intersectionObserver.restore();
 });
 
 it('should unobserve root elements when component has been unmounted', async () => {
+  intersectionObserver.mock();
   const show = ref(true);
 
   const { observer } = createHydrationObserver();
@@ -133,4 +146,34 @@ it('should unobserve root elements when component has been unmounted', async () 
   await flushPromises();
 
   expect(spyUnobserve).toHaveBeenCalledTimes(3);
+
+  intersectionObserver.restore();
+});
+
+it('should throw error when used outside of the setup method', async () => {
+  const handler = vi.fn();
+  const err = new Error(
+    'useHydrateWhenVisible must be called from the setup method.'
+  );
+
+  const container = document.createElement('div');
+  container.innerHTML = 'foo';
+  document.append(container);
+
+  const app = createApp(() => {
+    const result = useLazyHydration();
+
+    onMounted(() => {
+      useHydrateWhenVisible(result);
+    });
+
+    return () => 'foo';
+  });
+
+  app.config.errorHandler = handler;
+
+  app.mount(container);
+
+  expect(handler).toHaveBeenCalled();
+  expect(handler.mock.calls[0][0]).toStrictEqual(err);
 });

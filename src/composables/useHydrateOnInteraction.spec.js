@@ -1,11 +1,9 @@
+import { h, onMounted, ref } from 'vue';
 import { flushPromises } from '@vue/test-utils';
-import { expect, vi } from 'vitest';
-import { h, ref } from 'vue';
 
-import { withSSRSetup, triggerEvent } from '../../test/utils';
+import { withSSRSetup, triggerEvent, createApp } from '../../test/utils';
 
-import useLazyHydration from './useLazyHydration';
-import useHydrateOnInteraction from './useHydrateOnInteraction';
+import { useLazyHydration, useHydrateOnInteraction } from '.';
 
 beforeEach(() => {
   document.body.innerHTML = '';
@@ -17,9 +15,9 @@ it('should hydrate on interaction with single root element', async () => {
   const { container } = await withSSRSetup(() => {
     const result = useLazyHydration();
 
-    useHydrateOnInteraction(result, ['click', 'focus']);
+    useHydrateOnInteraction(result, ['focus']);
 
-    return () => h('div', h('button', { onClick: spyClick }, 'foo'));
+    return () => h('button', { onClick: spyClick }, 'foo');
   });
 
   // hydration not complete yet
@@ -27,7 +25,7 @@ it('should hydrate on interaction with single root element', async () => {
   expect(spyClick).not.toHaveBeenCalled();
 
   // trigger hydration and wait for it to complete
-  triggerEvent('click', container.querySelector('div'));
+  triggerEvent('focus', container.querySelector('button'));
   await flushPromises();
 
   // should be hydrated now
@@ -120,4 +118,64 @@ it('should remove listeners when component has been unmounted', async () => {
   await flushPromises();
 
   expect(spyRemoveEventListener).toHaveBeenCalledTimes(2);
+});
+
+it('should hydrate on interaction when composedPath API is not supported', async () => {
+  const spyClick = vi.fn();
+  const triggerLegacyEvent = (type, el) => {
+    const event = new Event(type, { bubbles: true });
+
+    event.path = undefined;
+    event.composedPath = undefined;
+
+    el.dispatchEvent(event);
+  };
+
+  const { container } = await withSSRSetup(() => {
+    const result = useLazyHydration();
+
+    useHydrateOnInteraction(result, ['focus']);
+
+    return () => h('div', h('button', { onClick: spyClick }, 'foo'));
+  });
+
+  // hydration not complete yet
+  triggerLegacyEvent('click', container.querySelector('button'));
+  expect(spyClick).not.toHaveBeenCalled();
+
+  // trigger hydration and wait for it to complete
+  triggerLegacyEvent('focus', container.querySelector('button'));
+  await flushPromises();
+
+  // should be hydrated now
+  triggerLegacyEvent('click', container.querySelector('button'));
+  expect(spyClick).toHaveBeenCalledOnce();
+});
+
+it('should throw error when used outside of the setup method', async () => {
+  const handler = vi.fn();
+  const err = new Error(
+    'useHydrateOnInteraction must be called from the setup method.'
+  );
+
+  const container = document.createElement('div');
+  container.innerHTML = 'foo';
+  document.append(container);
+
+  const app = createApp(() => {
+    const result = useLazyHydration();
+
+    onMounted(() => {
+      useHydrateOnInteraction(result);
+    });
+
+    return () => 'foo';
+  });
+
+  app.config.errorHandler = handler;
+
+  app.mount(container);
+
+  expect(handler).toHaveBeenCalled();
+  expect(handler.mock.calls[0][0]).toStrictEqual(err);
 });

@@ -1,8 +1,7 @@
 import { createSSRApp, h, nextTick, ref } from 'vue';
 import { renderToString } from '@vue/server-renderer';
-
-import { expect } from 'vitest';
 import { flushPromises } from '@vue/test-utils';
+
 import {
   ensureMocksReset,
   requestIdleCallback,
@@ -31,14 +30,6 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  if (intersectionObserver.isMocked()) {
-    intersectionObserver.restore();
-  }
-
-  if (requestIdleCallback.isMocked()) {
-    requestIdleCallback.restore();
-  }
-
   ensureMocksReset();
 });
 
@@ -47,7 +38,7 @@ it('should hydrate on Interaction', async () => {
 
   const { vnode, container } = mountWithHydration(
     '<button>foo</button>',
-    h(LazyHydrationWrapper, { onInteraction: true }, () =>
+    h(LazyHydrationWrapper, { onInteraction: ['focus'] }, () =>
       h('button', { onClick: spy }, 'foo')
     )
   );
@@ -325,6 +316,8 @@ it('should hydrate when component element is visible (full integration)', async 
   // should be hydrated now
   triggerEvent('click', container.querySelector('button'));
   expect(spy).toHaveBeenCalled();
+
+  intersectionObserver.restore();
 });
 
 it('should hydrate when triggered (full integration)', async () => {
@@ -366,6 +359,8 @@ it('should hydrate when triggered (full integration)', async () => {
   // should be hydrated now
   triggerEvent('click', container.querySelector('button'));
   expect(spy).toHaveBeenCalled();
+
+  intersectionObserver.restore();
 });
 
 it('should emit hydrated event when component has been hydrated (full integration)', async () => {

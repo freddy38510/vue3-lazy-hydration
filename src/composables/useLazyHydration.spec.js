@@ -4,13 +4,14 @@ import {
   defineComponent,
   getCurrentInstance,
   h,
+  onMounted,
   ref,
 } from 'vue';
 import { flushPromises } from '@vue/test-utils';
 
-import { withSSRSetup, triggerEvent } from '../../test/utils';
+import { withSSRSetup, triggerEvent, createApp } from '../../test/utils';
 
-import useLazyHydration from './useLazyHydration';
+import { useLazyHydration } from '.';
 
 it('should delay hydration', async () => {
   const result = {
@@ -368,4 +369,30 @@ it('should run onHydrated hook when component has been hydrated and its children
   triggerEvent('click', container.querySelector('button.async'));
   expect(spyAsyncCompClick).toHaveBeenCalled();
   expect(spyOnHydratedHook).toHaveBeenCalledOnce();
+});
+
+it('should throw error when used outside of the setup method', async () => {
+  const handler = vi.fn();
+  const err = new Error(
+    'useLazyHydration must be called from the setup method.'
+  );
+
+  const container = document.createElement('div');
+  container.innerHTML = 'foo';
+  document.append(container);
+
+  const app = createApp(() => {
+    onMounted(() => {
+      useLazyHydration();
+    });
+
+    return () => 'foo';
+  });
+
+  app.config.errorHandler = handler;
+
+  app.mount(container);
+
+  expect(handler).toHaveBeenCalled();
+  expect(handler.mock.calls[0][0]).toStrictEqual(err);
 });
