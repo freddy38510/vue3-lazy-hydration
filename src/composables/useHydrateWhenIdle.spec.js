@@ -3,7 +3,7 @@ import { expect, vi } from 'vitest';
 import { h, ref } from 'vue';
 
 import { ensureMocksReset, requestIdleCallback } from '../../test/dom-mocks';
-import { withSetup, triggerEvent } from '../../test/utils';
+import { withSSRSetup, triggerEvent } from '../../test/utils';
 
 import useLazyHydration from './useLazyHydration';
 import useHydrateWhenIdle from './useHydrateWhenIdle';
@@ -23,7 +23,7 @@ afterEach(() => {
 it('should hydrate when idle', async () => {
   const spyClick = vi.fn();
 
-  const { container } = await withSetup(() => {
+  const { container } = await withSSRSetup(() => {
     const result = useLazyHydration();
 
     useHydrateWhenIdle(result);
@@ -47,7 +47,7 @@ it('should hydrate when idle', async () => {
 it('should cancel Idle Callback when component has been hydrated', async () => {
   const spyCancelIdleCallback = vi.spyOn(window, 'cancelIdleCallback');
 
-  await withSetup(() => {
+  await withSSRSetup(() => {
     const result = useLazyHydration();
 
     useHydrateWhenIdle(result);
@@ -68,7 +68,7 @@ it('should cancel Idle Callback when component has been unmounted', async () => 
 
   const show = ref(true);
 
-  await withSetup(() => {
+  await withSSRSetup(() => {
     const LazyComp = {
       setup() {
         const result = useLazyHydration();
@@ -96,7 +96,7 @@ it('should hydrate when requestIdleCallback is unsupported', async () => {
 
   const spyClick = vi.fn();
 
-  const { container } = await withSetup(() => {
+  const { container } = await withSSRSetup(() => {
     const result = useLazyHydration();
 
     useHydrateWhenIdle(result);

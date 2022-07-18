@@ -3,7 +3,7 @@ import { renderToString } from '@vue/server-renderer';
 
 const originalWindow = window;
 
-function createApp(isClient, setupFn) {
+export function createApp(setupFn, isClient = false) {
   const App = {
     setup(props, ctx) {
       return setupFn(isClient, props, ctx);
@@ -13,12 +13,12 @@ function createApp(isClient, setupFn) {
   return createSSRApp(App);
 }
 
-export async function withSetup(setupFn) {
+export async function withSSRSetup(setupFn) {
   // make sure window is undefined at server-side
   vi.stubGlobal('window', undefined);
 
   // render at server-side
-  const html = await renderToString(createApp(false, setupFn));
+  const html = await renderToString(createApp(setupFn));
 
   // restore window for client-side
   vi.stubGlobal('window', originalWindow);
@@ -30,9 +30,9 @@ export async function withSetup(setupFn) {
   document.append(container);
 
   // client-side app
-  const app = createApp(true, setupFn);
+  const app = createApp(setupFn, true);
 
-  // hydrate
+  // hydrate application
   app.mount(container);
 
   return { app, container };

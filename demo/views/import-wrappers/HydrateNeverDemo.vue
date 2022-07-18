@@ -1,11 +1,11 @@
 <script setup>
-import { ref, defineAsyncComponent } from 'vue';
+import { ref } from 'vue';
 import HydrationState from '../../components/HydrationState.vue';
 
 import { hydrateNever } from '../../../src';
 
-const CounterComp = hydrateNever(
-  defineAsyncComponent(() => import('../../components/CounterComp.vue'))
+const CounterComp = hydrateNever(() =>
+  import('../../components/CounterComp.vue')
 );
 
 const isHydrated = ref(false);

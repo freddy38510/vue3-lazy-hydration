@@ -6,3 +6,5 @@ export { default as trackDepsOnRender } from './track-deps-on-render';
 export { default as waitForAsyncComponents } from './wait-for-async-components';
 export { default as getRootElements } from './get-root-elements';
 export { default as ensureParentHasSubTreeEl } from './ensure-parent-has-subtree-el';
+export { default as traverseChildren } from './traverse-children';
+export * from './helpers';

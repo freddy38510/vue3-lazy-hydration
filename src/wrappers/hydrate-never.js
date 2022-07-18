@@ -1,6 +1,5 @@
-import { useLazyHydration } from '../composables';
 import { createHydrationWrapper } from '../utils';
 
-export default function hydrateNever(component) {
-  return createHydrationWrapper(component, useLazyHydration);
+export default function hydrateNever(loader) {
+  return createHydrationWrapper(loader, () => {});
 }

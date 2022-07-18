@@ -2,7 +2,7 @@ import { flushPromises } from '@vue/test-utils';
 import { expect, vi } from 'vitest';
 import { h, ref } from 'vue';
 
-import { withSetup, triggerEvent } from '../../test/utils';
+import { withSSRSetup, triggerEvent } from '../../test/utils';
 
 import useLazyHydration from './useLazyHydration';
 import useHydrateOnInteraction from './useHydrateOnInteraction';
@@ -14,7 +14,7 @@ beforeEach(() => {
 it('should hydrate on interaction with single root element', async () => {
   const spyClick = vi.fn();
 
-  const { container } = await withSetup(() => {
+  const { container } = await withSSRSetup(() => {
     const result = useLazyHydration();
 
     useHydrateOnInteraction(result, ['click', 'focus']);
@@ -38,7 +38,7 @@ it('should hydrate on interaction with single root element', async () => {
 it('should hydrate on interaction with multiple root elements', async () => {
   const spyClick = vi.fn();
 
-  const { container } = await withSetup(() => {
+  const { container } = await withSSRSetup(() => {
     const result = useLazyHydration();
 
     useHydrateOnInteraction(result, ['click', 'focus']);
@@ -65,7 +65,7 @@ it('should hydrate on interaction with multiple root elements', async () => {
 it('should remove listeners when component has been hydrated', async () => {
   const spyClick = vi.fn();
 
-  const { container } = await withSetup(() => {
+  const { container } = await withSSRSetup(() => {
     const result = useLazyHydration();
 
     useHydrateOnInteraction(result, ['focus', 'select']);
@@ -95,7 +95,7 @@ it('should remove listeners when component has been hydrated', async () => {
 it('should remove listeners when component has been unmounted', async () => {
   const show = ref(true);
 
-  const { container } = await withSetup(() => {
+  const { container } = await withSSRSetup(() => {
     const LazyComp = {
       setup() {
         const result = useLazyHydration();

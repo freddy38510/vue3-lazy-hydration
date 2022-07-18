@@ -2,7 +2,7 @@ import { flushPromises } from '@vue/test-utils';
 import { expect, vi } from 'vitest';
 import { h, ref } from 'vue';
 
-import { withSetup, triggerEvent } from '../../test/utils';
+import { withSSRSetup, triggerEvent } from '../../test/utils';
 
 import useLazyHydration from './useLazyHydration';
 import useHydrateWhenTriggered from './useHydrateWhenTriggered';
@@ -15,7 +15,7 @@ it('should hydrate when trigger is true', async () => {
   const spyClick = vi.fn();
   const trigger = ref(false);
 
-  const { container } = await withSetup(() => {
+  const { container } = await withSSRSetup(() => {
     const result = useLazyHydration();
 
     useHydrateWhenTriggered(result, trigger);
@@ -42,7 +42,7 @@ it('should unWatch trigger when component has been unmounted', async () => {
 
   let spyHydrate;
 
-  await withSetup((isClient) => {
+  await withSSRSetup((isClient) => {
     const LazyComp = {
       setup() {
         const result = useLazyHydration();

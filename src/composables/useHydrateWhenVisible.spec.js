@@ -3,7 +3,8 @@ import { expect, vi } from 'vitest';
 import { h, ref } from 'vue';
 
 import { ensureMocksReset, intersectionObserver } from '../../test/dom-mocks';
-import { withSetup, triggerEvent } from '../../test/utils';
+import { withSSRSetup, triggerEvent } from '../../test/utils';
+
 import { createHydrationObserver } from '../utils';
 
 import useLazyHydration from './useLazyHydration';
@@ -24,7 +25,7 @@ afterEach(() => {
 it('should hydrate when single root element is visible', async () => {
   const spyClick = vi.fn();
 
-  const { container } = await withSetup(() => {
+  const { container } = await withSSRSetup(() => {
     const result = useLazyHydration();
 
     useHydrateWhenVisible(result);
@@ -53,7 +54,7 @@ it('should hydrate when single root element is visible', async () => {
 it('should hydrate when one of multiple root elements is visible', async () => {
   const spyClick = vi.fn();
 
-  const { container } = await withSetup(() => {
+  const { container } = await withSSRSetup(() => {
     const result = useLazyHydration();
 
     useHydrateWhenVisible(result);
@@ -87,7 +88,7 @@ it('should hydrate when IntersectionObserver API is unsupported', async () => {
 
   const spyClick = vi.fn();
 
-  const { container } = await withSetup(() => {
+  const { container } = await withSSRSetup(() => {
     const result = useLazyHydration();
 
     useHydrateWhenVisible(result);
@@ -108,7 +109,7 @@ it('should unobserve root elements when component has been unmounted', async () 
   const { observer } = createHydrationObserver();
   const spyUnobserve = vi.spyOn(observer, 'unobserve');
 
-  await withSetup(() => {
+  await withSSRSetup(() => {
     const LazyComp = {
       setup() {
         const result = useLazyHydration();

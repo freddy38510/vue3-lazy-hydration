@@ -1,11 +1,11 @@
 <script setup>
-import { ref, defineAsyncComponent } from 'vue';
+import { ref } from 'vue';
 import HydrationState from '../../components/HydrationState.vue';
 
 import { hydrateOnInteraction } from '../../../src';
 
-const InputComp = hydrateOnInteraction(
-  defineAsyncComponent(() => import('../../components/InputComp.vue'))
+const InputComp = hydrateOnInteraction(() =>
+  import('../../components/InputComp.vue')
 );
 
 const isHydrated = ref(false);

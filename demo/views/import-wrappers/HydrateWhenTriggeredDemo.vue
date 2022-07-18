@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineAsyncComponent } from 'vue';
+import { ref } from 'vue';
 import HydrationState from '../../components/HydrationState.vue';
 
 import { hydrateWhenTriggered } from '../../../src';
@@ -17,7 +17,7 @@ function onHydrated() {
 }
 
 const CounterComp = hydrateWhenTriggered(
-  defineAsyncComponent(() => import('../../components/CounterComp.vue')),
+  () => import('../../components/CounterComp.vue'),
   triggered
 );
 </script>

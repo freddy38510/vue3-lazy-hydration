@@ -1,12 +1,8 @@
-import { useHydrateWhenTriggered, useLazyHydration } from '../composables';
+import { useHydrateWhenTriggered } from '../composables';
 import { createHydrationWrapper } from '../utils';
 
-export default function hydrateWhenTriggered(component, triggered) {
-  return createHydrationWrapper(component, () => {
-    const result = useLazyHydration();
-
+export default function hydrateWhenTriggered(source, triggered) {
+  return createHydrationWrapper(source, (result) => {
     useHydrateWhenTriggered(result, triggered);
-
-    return result;
   });
 }

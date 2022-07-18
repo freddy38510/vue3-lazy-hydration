@@ -1,6 +1,6 @@
 import { getCurrentInstance, h, onMounted } from 'vue';
 
-import { withSetup } from '../../test/utils';
+import { withSSRSetup } from '../../test/utils';
 
 import traverseChildren from './traverse-children';
 
@@ -23,7 +23,7 @@ it('should traverse slots children with single element', async () => {
     },
   };
 
-  await withSetup(() => {
+  await withSSRSetup(() => {
     const instance = getCurrentInstance();
 
     onMounted(() => {
@@ -54,7 +54,7 @@ it('should traverse slots children with multiple elements', async () => {
     },
   };
 
-  await withSetup(() => {
+  await withSSRSetup(() => {
     const instance = getCurrentInstance();
 
     onMounted(() => {

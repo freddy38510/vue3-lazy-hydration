@@ -1,4 +1,4 @@
-import { computed, toRef } from 'vue';
+import { computed, defineComponent, markRaw, toRef } from 'vue';
 
 import {
   useLazyHydration,
@@ -8,71 +8,77 @@ import {
   useHydrateWhenTriggered,
 } from '../composables';
 
-import { createHydrationWrapper } from '../utils';
-
-const opts = {
-  props: {
-    whenIdle: {
-      default: false,
-      type: [Boolean, Number],
-    },
-    whenVisible: {
-      default: false,
-      type: [Boolean, Object],
-    },
-    onInteraction: {
-      default: false,
-      type: [Array, Boolean, String],
-    },
-    whenTriggered: {
-      default: undefined,
-      type: [Boolean, Object],
-    },
-  },
+const normalizeSlot = (slotContent) => {
+  return slotContent.length === 1 ? slotContent[0] : slotContent;
 };
 
-export default createHydrationWrapper(
-  null,
-  (props) => {
-    const result = useLazyHydration();
+export default markRaw(
+  defineComponent({
+    name: 'LazyHydrationWrapper',
+    inheritAttrs: false,
+    suspensible: false,
+    props: {
+      whenIdle: {
+        default: false,
+        type: [Boolean, Number],
+      },
+      whenVisible: {
+        default: false,
+        type: [Boolean, Object],
+      },
+      onInteraction: {
+        default: false,
+        type: [Array, Boolean, String],
+      },
+      whenTriggered: {
+        default: undefined,
+        type: [Boolean, Object],
+      },
+    },
+    emits: ['hydrated'],
 
-    if (!result.willPerformHydration) {
-      return result;
-    }
+    setup(props, { slots, emit }) {
+      const result = useLazyHydration();
 
-    if (props.whenIdle) {
-      useHydrateWhenIdle(
-        result,
-        props.whenIdle !== true ? props.whenIdle : undefined
-      );
-    }
+      if (!result.willPerformHydration) {
+        return () => normalizeSlot(slots.default());
+      }
 
-    if (props.whenVisible) {
-      useHydrateWhenVisible(
-        result,
-        props.whenVisible !== true ? props.whenVisible : undefined
-      );
-    }
+      result.onHydrated(() => emit('hydrated'));
 
-    if (props.onInteraction) {
-      let events;
-
-      if (props.onInteraction !== true) {
-        events = computed(() =>
-          Array.isArray(props.onInteraction)
-            ? props.onInteraction
-            : [props.onInteraction]
+      if (props.whenIdle) {
+        useHydrateWhenIdle(
+          result,
+          props.whenIdle !== true ? props.whenIdle : undefined
         );
       }
 
-      useHydrateOnInteraction(result, events);
-    }
+      if (props.whenVisible) {
+        useHydrateWhenVisible(
+          result,
+          props.whenVisible !== true ? props.whenVisible : undefined
+        );
+      }
 
-    if (props.whenTriggered !== undefined) {
-      useHydrateWhenTriggered(result, toRef(props, 'whenTriggered'));
-    }
+      if (props.onInteraction) {
+        let events;
 
-    return result;
-  },
-  opts
+        if (props.onInteraction !== true) {
+          events = computed(() =>
+            Array.isArray(props.onInteraction)
+              ? props.onInteraction
+              : [props.onInteraction]
+          );
+        }
+
+        useHydrateOnInteraction(result, events);
+      }
+
+      if (props.whenTriggered !== undefined) {
+        useHydrateWhenTriggered(result, toRef(props, 'whenTriggered'));
+      }
+
+      return () => normalizeSlot(slots.default());
+    },
+  })
 );

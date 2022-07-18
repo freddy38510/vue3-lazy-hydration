@@ -16,9 +16,16 @@ const getPackageNameCamelCase = () => {
 let format;
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command }) => ({
+export default defineConfig(({ command, mode }) => ({
   plugins: [vue(), devSSR()],
   publicDir: command === 'build' ? false : 'public',
+  define: {
+    __DEV__: `${
+      mode.production
+        ? `process.env.NODE_ENV === 'development'`
+        : 'import.meta.env.DEV'
+    }`,
+  },
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.js'),

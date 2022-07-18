@@ -1,4 +1,5 @@
 import { isVNode } from 'vue';
+import { isFunction, isObject } from './helpers';
 
 export default function traverseChildren(vnode, fn) {
   if (!isVNode(vnode)) {
@@ -17,9 +18,9 @@ export default function traverseChildren(vnode, fn) {
     return;
   }
 
-  if (typeof vnode.children === 'object') {
+  if (isObject(vnode.children)) {
     Object.keys(vnode.children).forEach((slotName) => {
-      if (typeof vnode.children[slotName] !== 'function') {
+      if (!isFunction(vnode.children[slotName])) {
         return;
       }
 

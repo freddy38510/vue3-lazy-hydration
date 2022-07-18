@@ -8,7 +8,7 @@ import {
 } from 'vue';
 import { flushPromises } from '@vue/test-utils';
 
-import { withSetup, triggerEvent } from '../../test/utils';
+import { withSSRSetup, triggerEvent } from '../../test/utils';
 
 import useLazyHydration from './useLazyHydration';
 
@@ -20,7 +20,7 @@ it('should delay hydration', async () => {
 
   const spyClick = vi.fn();
 
-  const { container } = await withSetup((isClient) => {
+  const { container } = await withSSRSetup((isClient) => {
     result[isClient ? 'client' : 'server'] = useLazyHydration();
 
     return () => h('button', { onClick: spyClick }, 'foo');
@@ -52,7 +52,7 @@ it('should run onCleanup hook when component has been unmounted', async () => {
 
   const show = ref(true);
 
-  await withSetup((isClient) => {
+  await withSSRSetup((isClient) => {
     const LazyComp = {
       setup() {
         result[isClient ? 'client' : 'server'] = useLazyHydration();
@@ -86,7 +86,7 @@ it('should not update component if hydration is delayed', async () => {
 
   const color = ref('red');
 
-  const { container } = await withSetup((isClient) => {
+  const { container } = await withSSRSetup((isClient) => {
     const LazyComp = {
       setup() {
         result[isClient ? 'client' : 'server'] = useLazyHydration();
@@ -127,7 +127,7 @@ it('should update props even if hydration is delayed', async () => {
 
   let lazyCompInstance;
 
-  const { container } = await withSetup((isClient) => {
+  const { container } = await withSSRSetup((isClient) => {
     const LazyComp = {
       props: ['foo'],
       setup(props) {
@@ -174,7 +174,7 @@ it('should not break if the parent is a renderless component and has been update
 
   let lazyCompInstance;
 
-  const { container } = await withSetup((isClient) => {
+  const { container } = await withSSRSetup((isClient) => {
     const LazyComp = defineComponent({
       setup() {
         result[isClient ? 'client' : 'server'] = useLazyHydration();
@@ -255,7 +255,7 @@ it('should run onHydrated hook when component has been hydrated', async () => {
   const spyClick = vi.fn();
   const spyOnHydratedHook = vi.fn();
 
-  const { container } = await withSetup((isClient) => {
+  const { container } = await withSSRSetup((isClient) => {
     const LazyComp = {
       setup() {
         result[isClient ? 'client' : 'server'] = useLazyHydration();
@@ -300,7 +300,7 @@ it('should run onHydrated hook when component has been hydrated and its children
   const spyAsyncCompClick = vi.fn();
   const spyOnHydratedHook = vi.fn();
 
-  const { container } = await withSetup((isClient) => {
+  const { container } = await withSSRSetup((isClient) => {
     const LazyComp = {
       setup() {
         result[isClient ? 'client' : 'server'] = useLazyHydration();
