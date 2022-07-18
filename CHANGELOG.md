@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/freddy38510/vue3-lazy-hydration/compare/v1.1.0...v1.1.1) (2022-07-18)
+
+
+### Bug Fixes
+
+* **import-wrappers:** properly handle env variables for production build ([76ec143](https://github.com/freddy38510/vue3-lazy-hydration/commit/76ec143dd8ea0b97cd5a0189e4cbc8f670b3a43f))
+
 ## [1.1.0](https://github.com/freddy38510/vue3-lazy-hydration/compare/v1.0.0...v1.1.0) (2022-07-18)
 
 
