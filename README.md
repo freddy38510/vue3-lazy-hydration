@@ -308,23 +308,21 @@ props: {
 
 ### Import Wrappers
 
-#### `hydrateNever(component)`
+#### `hydrateNever(source)`
 
 Wrap a component in a renderless component that will never be hydrated.
 
 ```html
 <script setup>
-  import { resolveComponent, defineAsyncComponent } from 'vue';
+  import { resolveComponent } from 'vue';
 
   import { hydrateNever } from 'vue3-lazy-hydration';
 
   // wrap a globally registered component resolved by its name
   const NeverHydratedComp = hydrateNever(resolveComponent('ComponentA'));
 
-  // wrap an async component
-  const NeverHydratedAsyncComp = hydrateNever(
-    defineAsyncComponent(() => import('./ComponentB.vue'))
-  );
+  // wrap an asynchronously loaded component
+  const NeverHydratedAsyncComp = hydrateNever(() => import('./ComponentB.vue'));
 </script>
 
 <template>
@@ -334,13 +332,13 @@ Wrap a component in a renderless component that will never be hydrated.
 </template>
 ```
 
-#### `hydrateWhenIdle(component, timeout = 2000)`
+#### `hydrateWhenIdle(source, timeout = 2000)`
 
 Wrap a component in a renderless component that will be hydrated when browser is idle.
 
 ```html
 <script setup>
-  import { resolveComponent, defineAsyncComponent } from 'vue';
+  import { resolveComponent } from 'vue';
 
   import { hydrateWhenIdle } from 'vue3-lazy-hydration';
 
@@ -350,9 +348,9 @@ Wrap a component in a renderless component that will be hydrated when browser is
     2000
   );
 
-  // wrap an async component
+  // wrap an asynchronously loaded component
   const LazilyHydratedAsyncComp = hydrateWhenIdle(
-    defineAsyncComponent(() => import('./ComponentB.vue')),
+    () => import('./ComponentB.vue'),
     4000
   );
 </script>
@@ -364,13 +362,13 @@ Wrap a component in a renderless component that will be hydrated when browser is
 </template>
 ```
 
-#### `hydrateWhenVisible(component, observerOpts = {})`
+#### `hydrateWhenVisible(source, observerOpts = {})`
 
 Wrap a component in a renderless component that will be hydrated when one of the root elements is visible.
 
 ```html
 <script setup>
-  import { resolveComponent, defineAsyncComponent } from 'vue';
+  import { resolveComponent } from 'vue';
 
   import { hydrateWhenVisible } from 'vue3-lazy-hydration';
 
@@ -380,9 +378,9 @@ Wrap a component in a renderless component that will be hydrated when one of the
     { rootMargin: '50px' }
   );
 
-  // wrap an async component
+  // wrap an asynchronously loaded component
   const LazilyHydratedAsyncComp = hydrateWhenVisible(
-    defineAsyncComponent(() => import('./ComponentB.vue')),
+    () => import('./ComponentB.vue'),
     {
       threshold: [0, 0.25, 0.5, 0.75, 1],
     }
@@ -396,13 +394,13 @@ Wrap a component in a renderless component that will be hydrated when one of the
 </template>
 ```
 
-#### `hydrateOnInteraction(component, events = ['focus'])`
+#### `hydrateOnInteraction(source, events = ['focus'])`
 
 Wrap a component in a renderless component that will be hydrated when one of the elements trigger one of the events in the `events` parameter.
 
 ```html
 <script setup>
-  import { resolveComponent, defineAsyncComponent } from 'vue';
+  import { resolveComponent } from 'vue';
 
   import { hydrateOnInteraction } from 'vue3-lazy-hydration';
 
@@ -411,9 +409,9 @@ Wrap a component in a renderless component that will be hydrated when one of the
     resolveComponent('ComponentA')
   );
 
-  // wrap an async component
+  // wrap an asynchronously loaded component
   const LazilyHydratedAsyncComp = hydrateOnInteraction(
-    defineAsyncComponent(() => import('./ComponentB.vue')),
+    () => import('./ComponentB.vue'),
     ['focus', 'click', 'touchstart']
   );
 </script>
@@ -425,13 +423,13 @@ Wrap a component in a renderless component that will be hydrated when one of the
 </template>
 ```
 
-#### `hydrateWhenTriggered(component, trigger)`
+#### `hydrateWhenTriggered(source, trigger)`
 
 Wrap a component in a renderless component that will be hydrated when the `trigger` parameter changes to true.
 
 ```html
 <script setup>
-  import { ref, resolveComponent, defineAsyncComponent } from 'vue';
+  import { ref, resolveComponent } from 'vue';
 
   import { hydrateOnInteraction } from 'vue3-lazy-hydration';
 
@@ -443,9 +441,9 @@ Wrap a component in a renderless component that will be hydrated when the `trigg
     hydrationTriggered
   );
 
-  // wrap an async component
+  // wrap an asynchronously loaded component
   const LazilyHydratedAsyncComp = hydrateOnInteraction(
-    defineAsyncComponent(() => import('./ComponentB.vue')),
+    () => import('./ComponentB.vue'),
     hydrationTriggered
   );
 
