@@ -1,10 +1,10 @@
 import { getCurrentInstance } from 'vue';
 
 export default function useHydrateWhenIdle(
-  { hydrate, onCleanup },
+  { willPerformHydration, hydrate, onCleanup },
   timeout = 2000
 ) {
-  if (!hydrate || typeof hydrate !== 'function') {
+  if (!willPerformHydration) {
     return;
   }
 

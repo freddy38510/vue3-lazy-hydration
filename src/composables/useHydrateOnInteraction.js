@@ -2,10 +2,10 @@ import { getCurrentInstance, onMounted, unref } from 'vue';
 import getRootElements from '../utils/get-root-elements';
 
 export default function useHydrateOnInteraction(
-  { hydrate, onCleanup },
+  { willPerformHydration, hydrate, onCleanup },
   events = ['focus']
 ) {
-  if (!hydrate || typeof hydrate !== 'function') {
+  if (!willPerformHydration) {
     return;
   }
 

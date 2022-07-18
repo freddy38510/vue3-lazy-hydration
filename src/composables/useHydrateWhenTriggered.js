@@ -1,10 +1,10 @@
 import { watch, isRef, getCurrentInstance } from 'vue';
 
 export default function useHydrateWhenTriggered(
-  { hydrate, onCleanup },
+  { willPerformHydration, hydrate, onCleanup },
   trigger
 ) {
-  if (!hydrate || typeof hydrate !== 'function') {
+  if (!willPerformHydration) {
     return;
   }
 

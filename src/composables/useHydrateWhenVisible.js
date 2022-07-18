@@ -2,10 +2,10 @@ import { getCurrentInstance, onMounted } from 'vue';
 import { createHydrationObserver, getRootElements } from '../utils';
 
 export default function useHydrateWhenVisible(
-  { hydrate, onCleanup },
+  { willPerformHydration, hydrate, onCleanup },
   observerOptions
 ) {
-  if (!hydrate || typeof hydrate !== 'function') {
+  if (!willPerformHydration) {
     return;
   }
 
