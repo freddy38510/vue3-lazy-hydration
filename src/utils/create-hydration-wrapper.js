@@ -91,6 +91,9 @@ export default function createHydrationWrapper(source, onSetup) {
           handleError(err, instance, 'async component loader');
         };
 
+        const loaded = ref(false);
+        const result = useLazyHydration();
+
         if (typeof window === 'undefined') {
           // on Server-side
           return load()
@@ -103,9 +106,6 @@ export default function createHydrationWrapper(source, onSetup) {
               return () => null;
             });
         }
-
-        const loaded = ref(false);
-        const result = useLazyHydration();
 
         if (!result.willPerformHydration) {
           // already resolved
