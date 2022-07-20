@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/freddy38510/vue3-lazy-hydration/compare/v1.1.1...v1.1.2) (2022-07-20)
+
+
+### Bug Fixes
+
+* **import-wrappers:** ensure the "useLazyHydration" composable is called at server-side ([b1041ba](https://github.com/freddy38510/vue3-lazy-hydration/commit/b1041ba767b7fbb572979997c953f4c828e56e1b))
+
 ## [1.1.1](https://github.com/freddy38510/vue3-lazy-hydration/compare/v1.1.0...v1.1.1) (2022-07-18)
 
 
