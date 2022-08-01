@@ -50,7 +50,7 @@
     "@vue/server-renderer": "3.2.37",
     "@vue/test-utils": "2.0.2",
     "c8": "7.12.0",
-    "eslint": "8.20.0",
+    "eslint": "8.21.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-config-vitest-globals": "0.0.3",
