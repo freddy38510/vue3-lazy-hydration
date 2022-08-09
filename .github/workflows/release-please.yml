@@ -8,8 +8,10 @@ on:
 
 jobs:
   tests:
+    if: ${{ !(contains(github.event.head_commit.message, 'chore')) }}
     uses: ./.github/workflows/run-unit-test.yml
   release-please:
+    if: ${{ !(contains(github.event.head_commit.message, 'chore')) }}
     needs: [tests] # require tests to pass before release-please runs
     runs-on: ubuntu-latest
     steps:
