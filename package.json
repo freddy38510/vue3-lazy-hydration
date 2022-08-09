@@ -59,7 +59,7 @@
     "eslint-plugin-vue": "9.3.0",
     "happy-dom": "6.0.4",
     "prettier": "2.7.1",
-    "sass": "1.53.0",
+    "sass": "1.54.3",
     "vite": "3.0.5",
     "vitest": "0.18.1",
     "vue-router": "4.1.3"
