@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/freddy38510/vue3-lazy-hydration/compare/v1.1.2...v1.1.3) (2022-08-09)
+
+
+### Bug Fixes
+
+* **deps:** move Vue dependency to devDependencies ([454ef9f](https://github.com/freddy38510/vue3-lazy-hydration/commit/454ef9f146632b60201279a07ed4bc0f9e842d84)), closes [#22](https://github.com/freddy38510/vue3-lazy-hydration/issues/22)
+
 ## [1.1.2](https://github.com/freddy38510/vue3-lazy-hydration/compare/v1.1.1...v1.1.2) (2022-07-20)
 
 
