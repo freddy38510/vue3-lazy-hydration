@@ -42,7 +42,7 @@
     "vue": ">=3.0.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "3.0.1",
+    "@vitejs/plugin-vue": "3.0.2",
     "@vitest/ui": "0.21.1",
     "@vue/server-renderer": "3.2.37",
     "@vue/test-utils": "2.0.2",
