@@ -4,6 +4,7 @@ import {
   defineComponent,
   getCurrentInstance,
   h,
+  Suspense,
   onMounted,
   ref,
 } from 'vue';
@@ -161,6 +162,58 @@ it('should update props even if hydration is delayed', async () => {
   expect(spyClick).not.toHaveBeenCalled();
   expect(container.querySelector('button').innerText).toBe('false');
   expect(lazyCompInstance.props.foo).toBeTruthy();
+});
+
+it('should update props even if hydration is delayed (with Suspense)', async () => {
+  // <Suspense> is an experimental feature and its API will likely change.
+  vi.spyOn(console, 'info').mockImplementation(() => {});
+
+  const result = {
+    client: {},
+    server: {},
+  };
+
+  const spyClick = vi.fn();
+
+  const bar = ref(false);
+
+  let lazyCompInstance;
+
+  const { container } = await withSSRSetup((isClient) => {
+    const LazyComp = {
+      props: ['foo'],
+      setup(props) {
+        result[isClient ? 'client' : 'server'] = useLazyHydration();
+
+        lazyCompInstance = getCurrentInstance();
+
+        return () => h('button', { onClick: spyClick }, props.foo);
+      },
+    };
+
+    return () => h(Suspense, h(LazyComp, { foo: bar.value }));
+  });
+
+  expect(result.client.willPerformHydration).toBe(true);
+  expect(result.server.willPerformHydration).toBe(false);
+
+  // should have not been hydrated
+  triggerEvent('click', container.querySelector('button'));
+  expect(spyClick).not.toHaveBeenCalled();
+  expect(container.querySelector('button').innerText).toBe('false');
+  expect(lazyCompInstance.props.foo).toBeFalsy();
+
+  // update props and wait for it to complete
+  bar.value = true;
+  await flushPromises();
+
+  // should have only updated props
+  triggerEvent('click', container.querySelector('button'));
+  expect(spyClick).not.toHaveBeenCalled();
+  expect(container.querySelector('button').innerText).toBe('false');
+  expect(lazyCompInstance.props.foo).toBeTruthy();
+
+  vi.restoreAllMocks();
 });
 
 it('should not break if the parent is a renderless component and has been updated', async () => {
