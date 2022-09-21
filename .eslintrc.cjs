@@ -14,6 +14,7 @@ module.exports = {
   globals: {
     __DEV__: 'readonly',
   },
+  ignorePatterns: ['node_modules', 'dist'],
   rules: {
     'prettier/prettier': 'error',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
