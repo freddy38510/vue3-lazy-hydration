@@ -14,6 +14,9 @@ dist-ssr
 coverage
 *.local
 .eslintcache
+yarn.lock
+package-lock.json
+.pnpm-store/
 
 /cypress/videos/
 /cypress/screenshots/

@@ -6,7 +6,7 @@ Inspired by [`vue-lazy-hydration`](https://github.com/maoberlehner/vue-lazy-hydr
 
 ## Installation
 
-Use the package manager [yarn v1](https://classic.yarnpkg.com/) or [npm](https://github.com/npm/cli) to install vue3-lazy-hydration.
+Use [yarn v1](https://classic.yarnpkg.com/), [npm](https://github.com/npm/cli) or [pnpm](https://pnpm.io/) package manager to install vue3-lazy-hydration.
 
 ```bash
 # install with yarn
@@ -14,6 +14,9 @@ yarn add vue3-lazy-hydration
 
 # install with npm
 npm install vue3-lazy-hydration
+
+# install with pnpm
+pnpm add vue3-lazy-hydration
 ```
 
 Optionally make the renderless component [available globally](https://vuejs.org/guide/components/registration.html#global-registration).
@@ -469,6 +472,8 @@ Please make sure to update unit tests as appropriate.
 
 ### Development
 
+Use the [pnpm](https://pnpm.io/) package manager to install vue3-lazy-hydration.
+
 1. Clone the repository
 
    ```bash
@@ -480,21 +485,13 @@ Please make sure to update unit tests as appropriate.
 2. Install dependencies
 
    ```bash
-   # with yarn
-   yarn
-
-   # with npm
-   npm install
+   pnpm i
    ```
 
 3. Start the development server which hosts a demo application to help develop the library
 
    ```bash
-   # with yarn
-   yarn dev
-
-   # with npm
-   npm run dev
+   pnpm dev
    ```
 
 ## Credits

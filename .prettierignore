@@ -1,4 +1,4 @@
 dist/
 LICENSE.md
-yarn.lock
+pnpm-lock.yaml
 CHANGELOG.md
