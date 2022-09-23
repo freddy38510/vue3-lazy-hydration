@@ -19,7 +19,11 @@ npm install vue3-lazy-hydration
 pnpm add vue3-lazy-hydration
 ```
 
-Optionally make the renderless component [available globally](https://vuejs.org/guide/components/registration.html#global-registration).
+### Importing Renderless Component
+
+If you want to use the renderless component you can either import it directly inside your Vue SFCs (see examples below) or make it [available globally](https://vuejs.org/guide/components/registration.html#global-registration).
+
+#### Global import for Vue
 
 ```js
 import { createSSRApp } from 'vue';
@@ -27,11 +31,25 @@ import { LazyHydrationWrapper } from 'vue3-lazy-hydration';
 
 const app = createSSRApp({});
 
-app.component(
-  // custom registered name
-  'LazyHydrate',
-  LazyHydrationWrapper
-);
+app.component('LazyHydrationWrapper', LazyHydrationWrapper);
+
+// or, you can use a custom registered name:
+// use <LazyHydrate> instead of <LazyHydrationWrapper>
+app.component('LazyHydrate', LazyHydrationWrapper);
+```
+
+#### Global import for Nuxt 3
+
+Create a [Nuxt 3 plugin](https://v3.nuxtjs.org/guide/directory-structure/plugins/) inside the `plugins` directory. The filename doesn't matter as Nuxt [auto-imports](https://v3.nuxtjs.org/guide/directory-structure/plugins/#which-files-are-registered) all top-level files of this directory.
+
+```js
+// plugins/lazy-hydration.ts
+import { LazyHydrationWrapper } from 'vue3-lazy-hydration';
+
+export default defineNuxtPlugin((nuxtApp) => {
+  // for custom registered name see Vue example above
+  nuxtApp.vueApp.component('LazyHydrationWrapper', LazyHydrationWrapper);
+});
 ```
 
 ## Usage
