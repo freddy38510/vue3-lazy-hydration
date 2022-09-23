@@ -1,6 +1,6 @@
 {
   "name": "vue3-lazy-hydration",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Lazy Hydration for Vue 3 SSR",
   "keywords": [
     "vue",

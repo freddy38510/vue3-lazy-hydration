@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/freddy38510/vue3-lazy-hydration/compare/v1.2.0...v1.2.1) (2022-09-23)
+
+
+### Bug Fixes
+
+* **package:** remove pre/post install scripts that break package installation as a dependency ([3674171](https://github.com/freddy38510/vue3-lazy-hydration/commit/367417190e7248bac8bff9dea6ad80c71c044cc1)), closes [#42](https://github.com/freddy38510/vue3-lazy-hydration/issues/42)
+
 ## [1.2.0](https://github.com/freddy38510/vue3-lazy-hydration/compare/v1.1.3...v1.2.0) (2022-09-23)
 
 
