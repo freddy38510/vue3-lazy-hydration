@@ -43,8 +43,6 @@
     }
   },
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "postinstall": "simple-git-hooks",
     "build": "rimraf dist && vite build && pnpm build-temp-types ",
     "build-temp-types": "tsc --emitDeclarationOnly -p ./tsconfig.types.json && api-extractor run && rimraf temp",
     "dev": "rimraf dist && vite",
