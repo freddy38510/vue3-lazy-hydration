@@ -6,7 +6,7 @@ specifiers:
   '@microsoft/api-extractor': 7.31.2
   '@rushstack/eslint-patch': 1.2.0
   '@types/node': 18.7.18
-  '@vitejs/plugin-vue': 3.0.1
+  '@vitejs/plugin-vue': 3.0.2
   '@vitest/ui': 0.21.1
   '@vue/eslint-config-airbnb-with-typescript': 7.0.0
   '@vue/server-renderer': 3.2.37
@@ -26,10 +26,10 @@ specifiers:
   pnpm: 7.12.1
   prettier: 2.7.1
   rimraf: 3.0.2
-  sass: 1.54.3
+  sass: 1.54.4
   simple-git-hooks: 2.8.0
   typescript: 4.8.3
-  vite: 3.0.5
+  vite: 3.0.6
   vitest: 0.21.1
   vue: 3.2.37
   vue-router: 4.1.3
@@ -40,7 +40,7 @@ devDependencies:
   '@microsoft/api-extractor': registry.npmjs.org/@microsoft/api-extractor/7.31.2
   '@rushstack/eslint-patch': registry.npmjs.org/@rushstack/eslint-patch/1.2.0
   '@types/node': registry.npmjs.org/@types/node/18.7.18
-  '@vitejs/plugin-vue': registry.npmjs.org/@vitejs/plugin-vue/3.0.1_vite@3.0.5+vue@3.2.37
+  '@vitejs/plugin-vue': registry.npmjs.org/@vitejs/plugin-vue/3.0.2_vite@3.0.6+vue@3.2.37
   '@vitest/ui': registry.npmjs.org/@vitest/ui/0.21.1
   '@vue/eslint-config-airbnb-with-typescript': registry.npmjs.org/@vue/eslint-config-airbnb-with-typescript/7.0.0_hnwv6fk2hbwu22jnybyjsu6teu
   '@vue/server-renderer': registry.npmjs.org/@vue/server-renderer/3.2.37_vue@3.2.37
@@ -60,11 +60,11 @@ devDependencies:
   pnpm: registry.npmjs.org/pnpm/7.12.1
   prettier: registry.npmjs.org/prettier/2.7.1
   rimraf: registry.npmjs.org/rimraf/3.0.2
-  sass: registry.npmjs.org/sass/1.54.3
+  sass: registry.npmjs.org/sass/1.54.4
   simple-git-hooks: registry.npmjs.org/simple-git-hooks/2.8.0
   typescript: registry.npmjs.org/typescript/4.8.3
-  vite: registry.npmjs.org/vite/3.0.5_sass@1.54.3
-  vitest: registry.npmjs.org/vitest/0.21.1_xbluqrolgufxqung7cewqvl2b4
+  vite: registry.npmjs.org/vite/3.0.6_sass@1.54.4
+  vitest: registry.npmjs.org/vitest/0.21.1_cg42lvls7g2dk5vzjwda75pytu
   vue: registry.npmjs.org/vue/3.2.37
   vue-router: registry.npmjs.org/vue-router/4.1.3_vue@3.2.37
 
@@ -868,17 +868,17 @@ packages:
       eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys/3.3.0
     dev: true
 
-  registry.npmjs.org/@vitejs/plugin-vue/3.0.1_vite@3.0.5+vue@3.2.37:
-    resolution: {integrity: sha512-Ll9JgxG7ONIz/XZv3dssfoMUDu9qAnlJ+km+pBA0teYSXzwPCIzS/e1bmwNYl5dcQGs677D21amgfYAnzMl17A==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@vitejs/plugin-vue/-/plugin-vue-3.0.1.tgz}
-    id: registry.npmjs.org/@vitejs/plugin-vue/3.0.1
+  registry.npmjs.org/@vitejs/plugin-vue/3.0.2_vite@3.0.6+vue@3.2.37:
+    resolution: {integrity: sha512-LAqb+tibmsKmSbxBzsMqWVJe6gDE4BDmFLjIzk4YdHgeiRCTokPbK8yRB3dRxDRwNk4IFwCFVE6+WP+YM0mbJg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@vitejs/plugin-vue/-/plugin-vue-3.0.2.tgz}
+    id: registry.npmjs.org/@vitejs/plugin-vue/3.0.2
     name: '@vitejs/plugin-vue'
-    version: 3.0.1
+    version: 3.0.2
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: registry.npmjs.org/vite/3.0.5_sass@1.54.3
+      vite: registry.npmjs.org/vite/3.0.6_sass@1.54.4
       vue: registry.npmjs.org/vue/3.2.37
     dev: true
 
@@ -5118,10 +5118,10 @@ packages:
       glob: registry.npmjs.org/glob/7.2.3
     dev: true
 
-  registry.npmjs.org/rollup/2.79.1:
-    resolution: {integrity: sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/rollup/-/rollup-2.79.1.tgz}
+  registry.npmjs.org/rollup/2.77.3:
+    resolution: {integrity: sha512-/qxNTG7FbmefJWoeeYJFbHehJ2HNWnjkAFRKzWN/45eNBBF/r8lo992CwcJXEzyVxs5FmfId+vTSTQDb+bxA+g==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/rollup/-/rollup-2.77.3.tgz}
     name: rollup
-    version: 2.79.1
+    version: 2.77.3
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
@@ -5179,10 +5179,10 @@ packages:
     version: 2.1.2
     dev: true
 
-  registry.npmjs.org/sass/1.54.3:
-    resolution: {integrity: sha512-fLodey5Qd41Pxp/Tk7Al97sViYwF/TazRc5t6E65O7JOk4XF8pzwIW7CvCxYVOfJFFI/1x5+elDyBIixrp+zrw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/sass/-/sass-1.54.3.tgz}
+  registry.npmjs.org/sass/1.54.4:
+    resolution: {integrity: sha512-3tmF16yvnBwtlPrNBHw/H907j8MlOX8aTBnlNX1yrKx24RKcJGPyLhFUwkoKBKesR3unP93/2z14Ll8NicwQUA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/sass/-/sass-1.54.4.tgz}
     name: sass
-    version: 1.54.3
+    version: 1.54.4
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
@@ -5925,11 +5925,11 @@ packages:
     engines: {node: '>= 0.10'}
     dev: true
 
-  registry.npmjs.org/vite/3.0.5_sass@1.54.3:
-    resolution: {integrity: sha512-bRvrt9Tw8EGW4jj64aYFTnVg134E8hgDxyl/eEHnxiGqYk7/pTPss6CWlurqPOUzqvEoZkZ58Ws+Iu8MB87iMA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/vite/-/vite-3.0.5.tgz}
-    id: registry.npmjs.org/vite/3.0.5
+  registry.npmjs.org/vite/3.0.6_sass@1.54.4:
+    resolution: {integrity: sha512-pjfsWIzfUlQME/VAmU6SsjdHkTt6WAHysuqPkHDcjzNu6IGtxDSZ/VfRYOwHaCqX4M3Ivz0kxuSfAPM6gAIX+w==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/vite/-/vite-3.0.6.tgz}
+    id: registry.npmjs.org/vite/3.0.6
     name: vite
-    version: 3.0.5
+    version: 3.0.6
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -5950,13 +5950,13 @@ packages:
       esbuild: registry.npmjs.org/esbuild/0.14.54
       postcss: registry.npmjs.org/postcss/8.4.16
       resolve: registry.npmjs.org/resolve/1.22.1
-      rollup: registry.npmjs.org/rollup/2.79.1
-      sass: registry.npmjs.org/sass/1.54.3
+      rollup: registry.npmjs.org/rollup/2.77.3
+      sass: registry.npmjs.org/sass/1.54.4
     optionalDependencies:
       fsevents: registry.npmjs.org/fsevents/2.3.2
     dev: true
 
-  registry.npmjs.org/vitest/0.21.1_xbluqrolgufxqung7cewqvl2b4:
+  registry.npmjs.org/vitest/0.21.1_cg42lvls7g2dk5vzjwda75pytu:
     resolution: {integrity: sha512-WBIxuFmIDPuK47GO6Lu9eNeRMqHj/FWL3dk73OHH3eyPPWPiu+UB3QHLkLK2PEggCqJW4FaWoWg8R68S7p9+9Q==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/vitest/-/vitest-0.21.1.tgz}
     id: registry.npmjs.org/vitest/0.21.1
     name: vitest
@@ -5995,7 +5995,7 @@ packages:
       local-pkg: registry.npmjs.org/local-pkg/0.4.2
       tinypool: registry.npmjs.org/tinypool/0.2.4
       tinyspy: registry.npmjs.org/tinyspy/1.0.2
-      vite: registry.npmjs.org/vite/3.0.5_sass@1.54.3
+      vite: registry.npmjs.org/vite/3.0.6_sass@1.54.4
     transitivePeerDependencies:
       - less
       - sass
