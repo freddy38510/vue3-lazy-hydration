@@ -79,7 +79,7 @@
     "eslint-plugin-vue": "9.3.0",
     "happy-dom": "6.0.4",
     "lint-staged": "13.0.3",
-    "pnpm": "7.12.1",
+    "pnpm": "7.12.2",
     "prettier": "2.7.1",
     "rimraf": "3.0.2",
     "sass": "1.54.4",
@@ -103,5 +103,5 @@
       "eslint --cache --fix"
     ]
   },
-  "packageManager": "pnpm@7.12.1"
+  "packageManager": "pnpm@7.12.2"
 }
