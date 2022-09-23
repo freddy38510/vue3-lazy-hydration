@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/freddy38510/vue3-lazy-hydration/compare/v1.1.3...v1.2.0) (2022-09-23)
+
+
+### Features
+
+* switch to Typescript and provide type declaration file ([b2ba9cc](https://github.com/freddy38510/vue3-lazy-hydration/commit/b2ba9cc75b5f1f5489e9fa97bbf84b3a49133a7f)), closes [#36](https://github.com/freddy38510/vue3-lazy-hydration/issues/36)
+
 ## [1.1.3](https://github.com/freddy38510/vue3-lazy-hydration/compare/v1.1.2...v1.1.3) (2022-08-09)
 
 
