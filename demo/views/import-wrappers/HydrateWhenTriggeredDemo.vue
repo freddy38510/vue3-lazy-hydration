@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import HydrationState from '../../components/HydrationState.vue';
 
@@ -28,7 +28,9 @@ const CounterComp = hydrateWhenTriggered(
   <HydrationState :is-hydrated="isHydrated" />
   <h3>Action</h3>
   <div class="box">
-    <p><button @click="triggerHydration">Trigger Hydration</button></p>
+    <p>
+      <button type="button" @click="triggerHydration">Trigger Hydration</button>
+    </p>
   </div>
   <h3>Wrapped component</h3>
   <div class="box">

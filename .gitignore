@@ -17,6 +17,7 @@ coverage
 yarn.lock
 package-lock.json
 .pnpm-store/
+temp
 
 /cypress/videos/
 /cypress/screenshots/

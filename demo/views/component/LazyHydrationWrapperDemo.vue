@@ -1,16 +1,16 @@
-<script setup>
-import { defineAsyncComponent, ref, computed, nextTick } from 'vue';
+<script setup lang="ts">
+import { defineAsyncComponent, ref, computed, nextTick, type Ref } from 'vue';
 import { useRoute } from 'vue-router';
 import HydrationState from '../../components/HydrationState.vue';
 
 import { LazyHydrationWrapper } from '../../../src';
 
-const CounterComp = defineAsyncComponent(() =>
-  import('../../components/CounterComp.vue')
+const CounterComp = defineAsyncComponent(
+  () => import('../../components/CounterComp.vue')
 );
 
-const InputComp = defineAsyncComponent(() =>
-  import('../../components/InputComp.vue')
+const InputComp = defineAsyncComponent(
+  () => import('../../components/InputComp.vue')
 );
 
 const { query, path: routePath } = useRoute();
@@ -24,7 +24,9 @@ const message = ref('initial message');
 const checkedHydrationTimings = ref(Object.keys(query));
 
 const hydrationTimings = computed(() => {
-  const result = {};
+  const result: {
+    [key: string]: true | Ref<boolean>;
+  } = {};
 
   checkedHydrationTimings.value.forEach((value) => {
     result[value] = value === 'whenTriggered' ? triggered : true;
@@ -56,7 +58,7 @@ function onChangeHydrationTimingCheckbox() {
     const params = new URLSearchParams();
 
     checkedHydrationTimings.value.forEach((value) => {
-      params.set(value, true);
+      params.set(value, '1');
     });
 
     window.location.href = `${routePath}?${params.toString()}`;
@@ -76,14 +78,13 @@ function onChangeHydrationTimingCheckbox() {
       >
         <li>
           <input
-            :id="key"
+            :id="key.toString()"
             v-model="checkedHydrationTimings"
             :value="key"
-            :checked="Object.keys(query).includes(key) ? 'checked' : false"
             type="checkbox"
             @change="onChangeHydrationTimingCheckbox"
           />
-          <label :for="key">{{ key }}</label>
+          <label :for="key.toString()">{{ key }}</label>
         </li>
       </template>
     </ul>
@@ -109,11 +110,15 @@ function onChangeHydrationTimingCheckbox() {
         <p>Focus on input to trigger hydration.</p>
       </template>
       <template v-if="hydrationTimings.whenTriggered">
-        <p><button @click="triggerHydration">Trigger Hydration</button></p>
+        <p>
+          <button type="button" @click="triggerHydration">
+            Trigger Hydration
+          </button>
+        </p>
       </template>
       <p>
-        <button @click="changeMessage">Change message</button> passed to v-model
-        input.
+        <button type="button" @click="changeMessage">Change message</button>
+        passed to v-model input.
       </p>
     </div>
   </div>

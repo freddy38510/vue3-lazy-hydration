@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import LazilyHydratedCounter from '../../components/LazilyHydratedCounter.vue';
 import HydrationState from '../../components/HydrationState.vue';

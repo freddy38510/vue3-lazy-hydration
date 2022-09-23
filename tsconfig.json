@@ -1,0 +1,19 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "target": "es2020",
+    "resolveJsonModule": true,
+    "baseUrl": "./",
+    "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "./temp",
+    "noEmitOnError": true,
+    "importsNotUsedAsValues": "remove",
+    "preserveValueImports": false,
+    "sourceMap": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "types": ["node", "vite/client", "vitest/globals"]
+  }
+}

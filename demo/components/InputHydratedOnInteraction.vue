@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useLazyHydration, useHydrateOnInteraction } from '../../src';
 
 defineProps({
@@ -21,7 +21,9 @@ result.onHydrated(() => emit('hydrated'));
     <p>
       <input
         :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="
+          $emit('update:modelValue', ($event.target as HTMLInputElement).value)
+        "
       />
     </p>
     <p>

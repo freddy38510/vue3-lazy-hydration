@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 defineProps({
   modelValue: {
     type: String,
@@ -12,7 +12,9 @@ defineEmits(['update:modelValue']);
     <p>
       <input
         :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="
+          $emit('update:modelValue', ($event.target as HTMLInputElement).value)
+        "
       />
     </p>
     <p>

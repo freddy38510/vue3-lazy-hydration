@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { getCurrentInstance, onMounted, ref, toRef } from 'vue';
 
 const props = defineProps({
@@ -7,13 +7,13 @@ const props = defineProps({
   },
 });
 
-const hasInitialVnode = getCurrentInstance().vnode.el !== null;
+const hasInitialVnode = getCurrentInstance()?.vnode.el !== null;
 
-const showReload = ref(undefined);
-const willPerformHydration = ref(undefined);
+const showReload = ref();
+const willPerformHydration = ref();
 const isHydrated = toRef(props, 'isHydrated');
 
-function stateValueClass(value) {
+function stateValueClass(value: boolean) {
   return value === true ? 'text-green' : 'text-red';
 }
 
@@ -32,8 +32,8 @@ onMounted(() => {
 <template>
   <div class="box">
     <p v-if="showReload" class="text-red">
-      Please <button @click="reload">Reload</button> to see lazy hydration
-      effect.
+      Please <button type="button" @click="reload">Reload</button> to see lazy
+      hydration effect.
     </p>
     <ul>
       <li>

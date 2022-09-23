@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 
 const count = ref(0);
@@ -10,7 +10,7 @@ function onClick() {
 <template>
   <div>
     <p>
-      <button @click="onClick">Increment Counter</button>
+      <button type="button" @click="onClick">Increment Counter</button>
     </p>
     <p>
       Counter: <code>{{ count }}</code>

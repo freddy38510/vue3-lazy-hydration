@@ -1,23 +1,27 @@
-module.exports = {
+require('@rushstack/eslint-patch/modern-module-resolution');
+const { defineConfig } = require('eslint-define-config');
+
+module.exports = defineConfig({
   root: true,
-  extends: [
-    'airbnb-base',
-    'plugin:vue/vue3-recommended',
-    'plugin:prettier/recommended',
-    'eslint-config-vitest-globals',
-  ],
   env: {
     browser: true,
     node: true,
-    'vue/setup-compiler-macros': true,
+    'vitest-globals/env': true,
   },
-  globals: {
-    __DEV__: 'readonly',
-  },
-  ignorePatterns: ['node_modules', 'dist'],
+  ignorePatterns: ['node_modules', 'dist', 'temp'],
+  extends: [
+    'plugin:vue/vue3-recommended',
+    '@vue/eslint-config-airbnb-with-typescript',
+    'plugin:vitest-globals/recommended',
+    'prettier',
+  ],
   rules: {
-    'prettier/prettier': 'error',
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-param-reassign': ['error', { props: false }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: true,
+      },
+    ],
   },
-};
+});

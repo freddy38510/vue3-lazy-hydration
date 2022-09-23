@@ -6,7 +6,7 @@
   </main>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue';
 import NavLinks from './components/NavLinks.vue';
 

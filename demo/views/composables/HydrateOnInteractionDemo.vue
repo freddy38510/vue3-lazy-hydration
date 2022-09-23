@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import HydrationState from '../../components/HydrationState.vue';
 import InputHydratedOnInteraction from '../../components/InputHydratedOnInteraction.vue';
@@ -36,8 +36,8 @@ function onHydrated() {
   <div class="box">
     <p>Focus on input to trigger hydration.</p>
     <p>
-      <button @click="changeMessage">Change message</button> passed to v-model
-      input.
+      <button type="button" @click="changeMessage">Change message</button>
+      passed to v-model input.
     </p>
   </div>
   <h3>Lazily hydrated component</h3>

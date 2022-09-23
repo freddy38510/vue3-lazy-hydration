@@ -1,11 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import HydrationState from '../../components/HydrationState.vue';
 
 import { hydrateWhenVisible } from '../../../src';
 
-const CounterComp = hydrateWhenVisible(() =>
-  import('../../components/CounterComp.vue')
+const CounterComp = hydrateWhenVisible(
+  () => import('../../components/CounterComp.vue')
 );
 
 const isHydrated = ref(false);

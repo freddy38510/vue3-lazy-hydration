@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, toRef } from 'vue';
 import {
   useLazyHydration,
@@ -50,7 +50,7 @@ result.onHydrated(() => emit('hydrated'));
 <template>
   <div>
     <p>
-      <button @click="onClick">Increment Counter</button>
+      <button type="button" @click="onClick">Increment Counter</button>
     </p>
     <p>
       Counter: <code>{{ count }}</code>
