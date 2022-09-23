@@ -71,7 +71,7 @@
     "c8": "7.12.0",
     "commitizen": "4.2.5",
     "cz-conventional-changelog": "3.3.0",
-    "eslint": "8.21.0",
+    "eslint": "8.23.1",
     "eslint-config-prettier": "8.5.0",
     "eslint-define-config": "1.7.0",
     "eslint-plugin-import": "2.26.0",
