@@ -23,7 +23,7 @@ specifiers:
   eslint-plugin-vue: 9.7.0
   happy-dom: 7.7.0
   lint-staged: 13.0.3
-  pnpm: 7.16.1
+  pnpm: 7.33.4
   prettier: 2.7.1
   rimraf: 3.0.2
   sass: 1.56.1
@@ -57,7 +57,7 @@ devDependencies:
   eslint-plugin-vue: 9.7.0_eslint@8.27.0
   happy-dom: 7.7.0
   lint-staged: 13.0.3
-  pnpm: 7.16.1
+  pnpm: 7.33.4
   prettier: 2.7.1
   rimraf: 3.0.2
   sass: 1.56.1
@@ -3819,8 +3819,8 @@ packages:
     hasBin: true
     dev: true
 
-  /pnpm/7.16.1:
-    resolution: {integrity: sha512-vtAw/kJ+Slm/XdLvd3zbSA8FKBgetrk+1KQFDnyvPP0q2Pjc1f2HsA7idYs9MJewYi4o03cjyZhAdqrCcjknsw==}
+  /pnpm/7.33.4:
+    resolution: {integrity: sha512-xEbf/tkwHpGM/GXq5U/sDSiE6ykLPho+o71PHNRWqkVLm6dJe4G/5Pg619Ow32ovekrr7pii5qtfamujB/+1bA==}
     engines: {node: '>=14.6'}
     hasBin: true
     dev: true
