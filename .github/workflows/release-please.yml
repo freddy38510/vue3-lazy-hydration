@@ -13,7 +13,7 @@ jobs:
     needs: [tests] # require tests to pass before release-please runs
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v3
+      - uses: googleapis/release-please-action@v3
         with:
           release-type: node
           package-name: vue3-lazy-hydration
