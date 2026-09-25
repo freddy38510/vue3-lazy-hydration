@@ -62,7 +62,7 @@
     "@types/node": "18.11.9",
     "@vitejs/plugin-vue": "3.2.0",
     "@vitest/coverage-c8": "^0.25.0",
-    "@vitest/ui": "0.25.2",
+    "@vitest/ui": "5.0.2",
     "@vue/eslint-config-airbnb-with-typescript": "7.0.0",
     "@vue/server-renderer": "3.2.45",
     "@vue/test-utils": "2.2.3",
